@@ -1,6 +1,7 @@
 # 디풋젼으로 사진 잘 찍는다고 소문나자
 
 **2024년 겨울 [AIKU](https://github.com/AIKU-Official) 활동으로 진행한 프로젝트입니다.**
+
 **2024년 2학기 AIKU Conference**
 
 ## Abstract
