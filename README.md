@@ -28,5 +28,5 @@
 
 ### Architecture
 <p align="center">
-    ![image](https://github.com/mingming2000/difootsion/assets/48408318/0250c7f7-fc38-4b27-9b30-9668d11d0ea8)
+    <img src="">
 </p>
