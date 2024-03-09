@@ -16,12 +16,12 @@
 
 > **RePaint** [[repo]](https://github.com/andreas128/RePaint)
 >
-> _Proposed in [“RePaint: Inpainting using Denoising Diffusion Probabilistic Models”](https://www.nature.com/articles/s41598-022-23052-9),
+> _Proposed in [“RePaint: Inpainting using Denoising Diffusion Probabilistic Models”](https://arxiv.org/abs/2201.09865),
 > CVPR 2022
 
 > **ControlNet** [[repo]](https://github.com/lllyasviel/ControlNet)
 >
-> _Proposed in [“Adding Conditional Control to Text-to-Image Diffusion Models),
+> _Proposed in [“Adding Conditional Control to Text-to-Image Diffusion Models"](https://arxiv.org/abs/2302.05543),
 > CVPR
 
 - 설명~
