@@ -28,5 +28,5 @@
 
 ### Architecture
 <p align="center">
-    <img src="">
+    <img src="./image/architecture.png">
 </p>
