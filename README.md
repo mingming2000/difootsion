@@ -30,3 +30,10 @@
 <p align="center">
     <img src="./image/architecture.png">
 </p>
+
+## 팀원
+
+- [김채현](https://github.com/kchyun): Research, Data processing, Modeling (StyleAgnosticNet, Re-ranking)
+- [김민영](https://github.com/EuroMinyoung186): Research, Data Crawling, Modeling (FashionMLP, Re-ranking)
+- [김민재](https://github.com/kwjames98): Research, Experiments, Modeling (FashionMLP, StyleAwareNet, Re-ranking)
+- [오원준](https://github.com/owj0421): Research, Data processing, Modeling (FashionMLP, StyleAwareNet, OutfitTransformer)
