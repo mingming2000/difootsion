@@ -52,7 +52,7 @@ ControlNet explanation
 
 ## Method 2: Mask based RePaint (Ongoing)
 
-Overall explanation : idea from scored based method
+Diffusion의 수학적 증명을 많이 해소한 score쪽의 논문들, 특히 NCSN 논문에서는 이상한(부자연스러운) 샘플들은 Real Image로 나타나질 않으니 모델이 학습할 수 없고, Random Noise로부터 역과정을 진행하는 Diffusion의 특성상 (todo)
 
 ### Architecture
 
