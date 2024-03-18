@@ -52,7 +52,8 @@ ControlNet explanation
 
 ## Method 2: Mask based RePaint (Ongoing)
 
-Diffusion의 수학적 증명을 많이 해소한 score쪽의 논문들, 특히 NCSN 논문에서는 이상한(부자연스러운) 샘플들은 Real Image로 나타나질 않으니 모델이 학습할 수 없고, Random Noise로부터 역과정을 진행하는 Diffusion의 특성상 (todo)
+Diffusion의 수학적 증명을 많이 해소한 score쪽의 논문들, 특히 NCSN 논문에서 설명&해결하는 디퓨전의 안 좋은 특성이 있습니다 : 이상한(부자연스러운) 샘플들은 Real Image로 나타나질 않으니 모델이 학습할 수 없고, Random Noise로부터 역과정을 진행하는 Diffusion의 특성상 '부자연스러운, 가능도가 낮은 샘플(low-density)' -> '자연스러운, 가능도가 높은 샘플(high-density)' 로 가야만 하는 상황이 발생한다는 것. NCSN에서는 이러한 점을 해결하기 위해, 학습 과정 중 각 timestep에서 perturbation를 강하게 주어 일부러 자연스러운 이미지도 부자연스러운 이미지로 변형을 주고, 해당 perturbation이 적용된 모델을 학습시키는 것을 제안하는 논문입니다.
+저희는 이러한 주장에서 영감을 얻어, 1차적으로 발이 생성된 사진(부자연스러움)에 forward process(noising step)의 일부을 진행한 후, 다시 backward process(denoising)를 적용하면 이미지가 좀 더 자연스러운 형태로 변화하지 않을까 하는 생각이었습니다. 비슷한 아키텍쳐를 가진 "Repaint"라는 논문이 있어, 프로젝트를 진행하며 이 메소드 부분을 저희끼리는 Repaint 메소드라고 부르고 있습니다. 기회가 된다면 Repaint 논문 구현도 진행하는 게 좋을 것 같습니다. 
 
 ### Architecture
 
@@ -61,9 +62,14 @@ Diffusion의 수학적 증명을 많이 해소한 score쪽의 논문들, 특히 
         style = "width: 70%">
 </p>
 
-#### 1. Stable Diffusion
+#### 1. RePaint (Stable Diffusion)
+
+RePaint 메소드는 앞서 설명드렸듯, 완성된 사진에 임의의 노이즈를 첨가해 (timestep t=0에서 t=80 정도까지 forward process) 모델에 input으로 집어넣고, 다시 denoising을 하며 자연스러운 이미지로 변화시키려는 목적이었습니다.
+결과적으로, RePaint 메소드는 성공적이진 못했습니다. Stable Diffusion에서 실패 이유는 다음과 같이 분석하고 있습니다 : Stable Diffusion은 VAE 구조를 차용하여 이미지를 latent로 보낸 후 noising, denoising을 진행하는 모델입니다. 따라서 latent에서의 noising은 이미지의 압축된 정보들을 변형하는 것이기 때문에, 아주 적은 timestep으로만 forward를 시켜도 얼굴 등의 세부정보들이 상당히 많이 손상되는 것을 막을 수가 없었습니다.
 
 #### 2. RePaint (DDIM)
+
+그래서 우리는 feature-level diffusion model인 Stable Diffusion에서 이 메소드를 적용하는 것이 아니라, pixel-level diffusion model인 DDIM에서 이 메소드를 적용해보고자 했습니다. 그러나 DDIM을 실행해보니, 애초에 고해상도 이미지를 학습한 모델이 아니기 때문에 저희가 원하는 task(사람 사진 수정 - 고해상도 작업)를 수행하기에 어려움이 있어 보였습니다. 이에 DDIM 에서도 해당 메소드를 적용할 수가 없어 RePaint 메소드는 추후에 더 디벨롭을 하려 합니다
 
 ## Demo
 
