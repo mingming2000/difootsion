@@ -43,12 +43,28 @@ Stable Diffusion 모델을 활용하여 text condition을 주고, 1차적으로 
 #### 1. Stable Diffusion (Outpainting)
 
 BLIP encoder 을 통해 text embedding을 생성하고, Stable Diffusion 기반 RealisticVision model의 condition으로 제공합니다. 
-RealisticVision은
+RealisticVision은 실사를 생성하는 Stable Diffusion 모델로, 이를 단독으로 사용한 outpainting 결과는 다음과 같았습니다.
+![목표 설정](https://github.com/mingming2000/difootsion/assets/102716945/18251508-5f8d-4a0b-8331-6fc52da674cc)
+하반신이 생성되긴 했지만, 자연스러운 자연스러운 사진이라고 보기에는 아쉬운 부분이 몇 가지 있습니다.
+저희는 이 모델의 세 가지 한계점을 인식하고, 다음과 같은 목표를 설정했습니다.
+
+- 512x512만 생성할 수 있는 기존 모델과 달리, 다양한 해상도를 생성
+- 자연스러운 배경 생성
+- 인물의 어려운 포즈 (ex 다리 꼬는 자세)도 자연스럽게 생성
+
+최종적으로,
+1) Grid를 사용하여 512x512가 아닌 해상도 생성
+2) BLIP으로 인물 pose에 대한 prompt 자동 생성
+이 두 가지를 통해 다음과 같은 개선된 결과물을 얻을 수 있었습니다.
+![outpainting output](https://github.com/mingming2000/difootsion/assets/102716945/0122f2bd-8909-4148-bc9a-b7339490a357)
+
 
 #### 2. ControlNet (Openpose Editing via Human Interaction)
 
-Stable Diffusion pose limitation -> Openpose editing
-ControlNet explanation
+Outpainting 단계의 결과물은 여전히 다리를 꼬는 것 등 어려운 포즈는 모델이 이해하지 못하여 다리가 3개가 되는 한계점이 있었고, 이 문제를 해결하기 위해 ControlNet을 도입하였습니다.
+ControlNet은 Openpose를 이용하여 사람의 관절을 자동으로 인식하고 Stable Diffusion에 Condition으로 넣어주어, 보다 나은 인체를 표현하는 모델입니다. 
+Outpainting 결과물에 ControlNet을 바로 적용할 경우, 누워있는 자세나, 다리를 꼬는 자세는 Openpose에 의해 자동으로 인식되지 않으며, prompt로 인물의 자세를 자세히 설명하더라도 모델이 이를 이해하기가 어려웠습니다.
+그래서 저희는 사용자가 손쉽게 Openpose를 수정할 수 있는 과정을 추가하여, 어떤 복잡한 자세든 모델이 이해할 수 있도록 하였습니다.
 
 ## Method 2: Mask based RePaint (Ongoing)
 
