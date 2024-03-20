@@ -75,6 +75,7 @@ Outpainting 결과물에 ControlNet을 바로 적용할 경우, 누워있는 자
     <img src = "./image/openpose_editor.gif"
         style = "width: 70%">
 </p>
+
 ## Method 2: Mask based RePaint (Ongoing)
 
 Diffusion의 수학적 증명을 많이 해소한 score쪽의 논문들, 특히 NCSN 논문에서 설명&해결하는 디퓨전의 안 좋은 특성이 있습니다 : 이상한(부자연스러운) 샘플들은 Real Image로 나타나질 않으니 모델이 학습할 수 없고, Random Noise로부터 역과정을 진행하는 Diffusion의 특성상 '부자연스러운, 가능도가 낮은 샘플(low-density)' -> '자연스러운, 가능도가 높은 샘플(high-density)' 로 가야만 하는 상황이 발생한다는 것. NCSN에서는 이러한 점을 해결하기 위해, 학습 과정 중 각 timestep에서 perturbation를 강하게 주어 일부러 자연스러운 이미지도 부자연스러운 이미지로 변형을 주고, 해당 perturbation이 적용된 모델을 학습시키는 것을 제안하는 논문입니다.
