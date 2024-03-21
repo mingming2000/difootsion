@@ -2,7 +2,7 @@
 
 **2024년 겨울 [AIKU](https://github.com/AIKU-Official) 활동으로 진행한 프로젝트입니다.**
 
-**2024년 2학기 AIKU Conference 1등 수상!**
+**2024년 겨울 AIKU Conference 1등 수상!**
 
 ## Abstract
 
